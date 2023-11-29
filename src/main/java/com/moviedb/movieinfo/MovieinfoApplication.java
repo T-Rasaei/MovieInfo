@@ -10,4 +10,6 @@ public class MovieinfoApplication {
 		SpringApplication.run(MovieinfoApplication.class, args);
 	}
 
+
+
 }
