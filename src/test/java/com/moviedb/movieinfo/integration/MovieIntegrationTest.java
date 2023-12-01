@@ -1,9 +1,7 @@
 package com.moviedb.movieinfo.integration;
 
 import com.moviedb.movieinfo.controller.MovieController;
-import com.moviedb.movieinfo.omdbapi.FetchFromApiService;
-import jdk.dynalink.beans.StaticClass;
-import lombok.RequiredArgsConstructor;
+import com.moviedb.movieinfo.service.FetchFromApiService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

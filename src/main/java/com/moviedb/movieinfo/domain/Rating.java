@@ -1,20 +1,16 @@
 package com.moviedb.movieinfo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rating {
-    @Id
-    @GeneratedValue
-    private int id;
-    private String Source;
+    @JsonProperty("Source")
+    private String source;
+    @JsonProperty("Value")
     private String value;
 }
