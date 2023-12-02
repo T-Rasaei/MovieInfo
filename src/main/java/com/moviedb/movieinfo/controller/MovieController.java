@@ -44,7 +44,7 @@ public class MovieController {
     @GetMapping("/searchtitle/{title}")
     @Operation(tags = "Find title of movie",
             description = "In this section, you can see the title of a movie, then use the exact title for other sections")
-    public List<MovieSearch> getTypeOfMovie(@PathVariable String title) {
+    public List<MovieSearch> getTitleOfMovie(@PathVariable String title) {
         return movieService.getTitleOfMovie(title);
     }
 

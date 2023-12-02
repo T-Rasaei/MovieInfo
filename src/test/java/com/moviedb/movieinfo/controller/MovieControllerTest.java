@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
@@ -46,17 +45,17 @@ class MovieControllerTest {
                 5,
                 "10");
 
-        MovieSearch MovieSearch1 = new MovieSearch("tt0120338",
+        movieSearch1 = new MovieSearch("tt0120338",
                 "Titanic",
                 "1997",
                 "movie",
                 "");
-        MovieSearch MovieSearch2 = new MovieSearch("tt1640571",
+        movieSearch2 = new MovieSearch("tt1640571",
                 "Titanic II",
                 "2010",
                 "series",
                 "" );
-        movieSearchList = List.of(MovieSearch1,MovieSearch2);
+        movieSearchList = List.of(movieSearch1,movieSearch2);
     }
 
     @Test

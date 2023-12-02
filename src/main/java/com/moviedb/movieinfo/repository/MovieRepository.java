@@ -18,7 +18,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query(value = "SELECT * FROM movie WHERE  box_office IS NOT NULL \n" +
             "AND NOT box_office LIKE 'N/A' " +
-            "ORDER BY imdb_rating DESC limit 2",
+            "ORDER BY imdb_rating DESC limit 10",
             nativeQuery = true)
     List<Movie> findTop10Movie();
 }

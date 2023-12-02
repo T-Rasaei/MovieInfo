@@ -1,26 +1,34 @@
 package com.moviedb.movieinfo.integration;
 
 import com.moviedb.movieinfo.controller.MovieController;
-import com.moviedb.movieinfo.service.FetchFromApiService;
+import com.moviedb.movieinfo.domain.MovieSearch;
+import com.moviedb.movieinfo.domain.Rate;
+import com.moviedb.movieinfo.domain.Top10Response;
+import com.moviedb.movieinfo.repository.MovieRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MovieIntegrationTest {
+class MovieIntegrationTest {
     @LocalServerPort
     private int port;
     private String baseUrl = "http://localhost";
-    @Autowired
-    private FetchFromApiService apiService;
+
     private RestTemplate restTemplate;
+    @Autowired
+    private MovieRepository movieRepository;
 
     @BeforeEach
     void setUp() {
@@ -28,21 +36,45 @@ public class MovieIntegrationTest {
     }
 
     @Test
-    public void checkGetTypeOfMovie(){
-        List<String> movieList = List.of(
-                "Batman Begins",
-                "The Batman",
-                "Batman v Superman: Dawn of Justice",
-                "Batman",
-                "Batman Returns",
-                "Batman & Robin",
-                "Batman Forever",
-                "The Lego Batman Movie",
-                "Batman: The Animated Series",
-                "Batman v Superman: Dawn of Justice (Ultimate Edition)");
-        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/batman";
-        List<String> result = restTemplate.getForObject(baseUrl,List.class);
-        assertThat(result.size()).isEqualTo(movieList.size());
-        assertThat(result).isEqualTo(movieList);
+    void checkGetTitleOfMovie(){
+        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/searchtitle/titanic";
+        List<MovieSearch> result = restTemplate.getForObject(baseUrl,List.class);
+        assertThat(result).isNotEmpty();
+    }
+
+    @Test
+    void checkHasOscar(){
+        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/Oscar/titanic?year=1997";
+        boolean hasOscar = restTemplate.getForObject(baseUrl,Boolean.class);
+        assertThat(hasOscar).isTrue();
+    }
+
+    @Test
+    void checkHasNotOscar(){
+        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/Oscar/titanic?year=1996";
+        boolean hasOscar = restTemplate.getForObject(baseUrl,Boolean.class);
+        assertThat(hasOscar).isFalse();
+    }
+
+    @Test
+    void checkRatingToExistsMovie(){
+        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/rating?title=titanic&year=1997&type=movie&rate=" + Rate.TWO.name();
+        ResponseEntity<String> newRate = restTemplate.exchange(baseUrl, HttpMethod.PUT, null, String.class);
+        assertThat(newRate.getBody()).isNotEqualTo("Movie not found");
+    }
+
+    @Test
+    void checkRatingToNotExistsMovie(){
+        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/rating?title=rasaei&year=2024&type=movie&rate=" + Rate.TWO.name();
+        ResponseEntity<String> newRate = restTemplate.exchange(baseUrl, HttpMethod.PUT, null, String.class);
+        assertThat(newRate.getBody()).isEqualTo("Movie not found");
+    }
+
+    @Test
+    void checkFindListTop10Movie(){
+        baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/top10Movies";
+        List<Top10Response> responseList = restTemplate.getForObject(baseUrl,List.class);
+        if (movieRepository.count() > 0)
+            assertThat(responseList).isNotEmpty();
     }
 }
