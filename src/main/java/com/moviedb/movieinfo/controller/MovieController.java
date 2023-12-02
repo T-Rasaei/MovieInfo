@@ -27,7 +27,7 @@ public class MovieController {
     public ResponseEntity<String> ratingToMovie(@RequestParam String title,
                                                 @RequestParam String year,
                                                 @RequestParam String type,
-                                                @RequestParam("rate") Rate rate) {
+                                                @RequestParam Rate rate) {
         var response = movieService.ratingToMovie(title.toLowerCase(), year, type.toLowerCase(), rate.getValue());
         return ResponseEntity.ok(response);
     }
