@@ -24,7 +24,7 @@ public class MovieService {
     private final TransferToDBService transferToDBService;
 
     public List<MovieSearch> getTitleOfMovie(String title) {
-        List<MovieSearch> result = apiService.fetchTypeOfMovie(title);
+        List<MovieSearch> result = apiService.fetchTitleOfMovie(title);
         if (! result.isEmpty())
             transferToDBService.transferToDatabase(result);
         return result;

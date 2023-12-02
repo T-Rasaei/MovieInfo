@@ -42,7 +42,7 @@ class MovieControllerTest {
                 "" );
         List<MovieSearch> movieList = List.of(movie1,movie2);
 
-        when(movieService.getTypeOfMovie(anyString())).thenReturn(movieList);
+        when(movieService.getTitleOfMovie(anyString())).thenReturn(movieList);
         mockMvc.perform(get(MovieController.BASE_URL+"/{title}",title))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()",is(movieList.size())));

@@ -17,9 +17,22 @@ class MovieServiceTest {
     FetchFromApiService apiService;
 
     @Test
-    void checkGetTypeOfMovie() {
+    void checkGetTitleOfMovie() {
         String title = "batman";
-        movieService.getTypeOfMovie(title);
-        verify(apiService).fetchTypeOfMovie(title);
+        movieService.getTitleOfMovie(title);
+        verify(apiService).fetchTitleOfMovie(title);
+    }
+
+
+    @Test
+    void hasOscar() {
+    }
+
+    @Test
+    void ratingToMovie() {
+    }
+
+    @Test
+    void findTop10Movie() {
     }
 }
