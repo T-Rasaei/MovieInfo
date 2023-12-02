@@ -1,10 +1,13 @@
 package com.moviedb.movieinfo.integration;
 
 import com.moviedb.movieinfo.controller.MovieController;
+import com.moviedb.movieinfo.domain.Movie;
 import com.moviedb.movieinfo.domain.MovieSearch;
 import com.moviedb.movieinfo.domain.Rate;
 import com.moviedb.movieinfo.domain.Top10Response;
 import com.moviedb.movieinfo.repository.MovieRepository;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class MovieIntegrationTest {
+class MovieIntegrationTest implements IntegrationTest{
     @LocalServerPort
     private int port;
     private String baseUrl = "http://localhost";
@@ -29,10 +30,26 @@ class MovieIntegrationTest {
     private RestTemplate restTemplate;
     @Autowired
     private MovieRepository movieRepository;
+    private Movie movie;
 
     @BeforeEach
     void setUp() {
         restTemplate = new RestTemplate();
+        movie = Movie.builder()
+                .id(1L)
+                .title("night")
+                .year("2010")
+                .imdbRating(7.5)
+                .imdbVotes("50")
+                .response("true")
+                .type("movie")
+                .boxOffice("$303,300,200")
+                .build();
+    }
+
+    @AfterEach
+    void afterEach() {
+        movieRepository.delete(movie);
     }
 
     @Test
@@ -72,9 +89,10 @@ class MovieIntegrationTest {
 
     @Test
     void checkFindListTop10Movie(){
+        movieRepository.save(movie);
         baseUrl = baseUrl + ":" + port + MovieController.BASE_URL + "/top10Movies";
         List<Top10Response> responseList = restTemplate.getForObject(baseUrl,List.class);
-        if (movieRepository.count() > 0)
-            assertThat(responseList).isNotEmpty();
+        assertThat(responseList).isNotEmpty();
+
     }
 }
