@@ -23,10 +23,6 @@ public class TransferToDBService {
             Movie existsMovie = movieRepository.findMovieInfo(movieSearch.getTitle(),
                     movieSearch.getYear(),
                     movieSearch.getType());
-            System.out.println(movieSearch.getTitle()+" "+
-                    movieSearch.getYear()+" " +
-                    movieSearch.getType());
-            System.out.println(existsMovie);
             if (existsMovie == null)
                 movieList.add(apiService.fetchMovieInfo(movieSearch.getTitle(),
                         movieSearch.getYear(),

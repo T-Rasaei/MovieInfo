@@ -21,7 +21,7 @@ public class FetchFromApiService {
 
     private final RestTemplate restTemplate;
 
-    public List<MovieSearch> fetchTypeOfMovie(String title) {
+    public List<MovieSearch> fetchTitleOfMovie(String title) {
         String url = BASEURL + "?s=" + title + "&apikey=" + APIKEY;
         ObjectMapper mapper = new ObjectMapper();
         MovieSearchResponse result = restTemplate.getForObject(url, MovieSearchResponse.class);
