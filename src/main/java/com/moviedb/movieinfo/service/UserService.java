@@ -20,16 +20,16 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     public UserResponse createUser(UserRequest request){
         User user = User.builder()
-                .email(request.getEmail())
+                .userName(request.getUserName())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(Role.USER)
                 .build();
         var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(savedUser,jwtToken);
         return UserResponse
                 .builder()
-                .email(user.getUsername())
+                .userName(user.getUsername())
                 .accessToken(jwtToken)
                 .build();
     }
@@ -47,13 +47,13 @@ public class UserService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(), request.getPassword()));
-        var user = userRepository.findByEmail(request.getUsername())
+        var user = userRepository.findByUserName(request.getUsername())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(user,jwtToken);
         return UserResponse
                 .builder()
-                .email(user.getUsername())
+                .userName(user.getUsername())
                 .accessToken(jwtToken)
                 .build();
     }

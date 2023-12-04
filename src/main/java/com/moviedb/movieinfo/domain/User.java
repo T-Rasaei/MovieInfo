@@ -20,7 +20,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private int id;
-    private String email;
+    private String userName;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -37,7 +37,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return userName;
     }
 
     @Override
