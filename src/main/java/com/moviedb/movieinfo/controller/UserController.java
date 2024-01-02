@@ -1,6 +1,5 @@
 package com.moviedb.movieinfo.controller;
 
-import com.moviedb.movieinfo.domain.AuthorizeRequest;
 import com.moviedb.movieinfo.domain.UserRequest;
 import com.moviedb.movieinfo.domain.UserResponse;
 import com.moviedb.movieinfo.service.UserService;
@@ -31,7 +30,7 @@ public class UserController {
     @Tag(name = "Access to token",
     description = "If you have already created your user, you can receive the token for your user in this section")
     public ResponseEntity<UserResponse> authenticate(
-            @RequestBody AuthorizeRequest request
+            @RequestBody UserRequest request
     ) {
         return ResponseEntity.ok(userService.authorize(request));
     }

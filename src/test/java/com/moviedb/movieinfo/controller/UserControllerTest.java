@@ -1,8 +1,7 @@
 package com.moviedb.movieinfo.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviedb.movieinfo.domain.AuthorizeRequest;
+import com.moviedb.movieinfo.domain.UserRequest;
 import com.moviedb.movieinfo.domain.UserResponse;
 import com.moviedb.movieinfo.jwt.JwtAuthenticationFilter;
 import com.moviedb.movieinfo.jwt.JwtService;
@@ -37,7 +36,7 @@ class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
     private UserResponse userResponse;
-    private AuthorizeRequest authorizeRequest;
+    private UserRequest userRequest;
 
     @BeforeEach
     void setUp() {
@@ -45,8 +44,8 @@ class UserControllerTest {
                 .userName("test")
                 .accessToken("token")
                 .build();
-        authorizeRequest = AuthorizeRequest.builder()
-                .username("test")
+        userRequest = UserRequest.builder()
+                .userName("test")
                 .password("test")
                 .build();
     }
@@ -66,7 +65,7 @@ class UserControllerTest {
         when(userService.authorize(any())).thenReturn(userResponse);
         this.mockMvc.perform(post(UserController.BASE_URL + "/authorize")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(authorizeRequest)))
+                        .content(objectMapper.writeValueAsString(userRequest)))
                 .andExpect(status().isOk());
     }
 }

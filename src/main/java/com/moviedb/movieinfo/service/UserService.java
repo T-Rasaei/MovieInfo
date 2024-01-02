@@ -43,11 +43,11 @@ public class UserService {
         tokenRepository.save(token);
     }
 
-    public UserResponse authorize(AuthorizeRequest request){
+    public UserResponse authorize(UserRequest request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(), request.getPassword()));
-        var user = userRepository.findByUserName(request.getUsername())
+                        request.getUserName(), request.getPassword()));
+        var user = userRepository.findByUserName(request.getUserName())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(user,jwtToken);

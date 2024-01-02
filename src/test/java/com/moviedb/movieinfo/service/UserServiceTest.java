@@ -73,8 +73,8 @@ class UserServiceTest {
         when(userRepository.findByUserName(any())).thenReturn(Optional.of(user));
         when(tokenRepository.save(any())).thenReturn(token);
         when(jwtService.generateToken(any())).thenReturn(token.getToken());
-        UserResponse response = userService.authorize(AuthorizeRequest.builder()
-                .username(user.getUsername())
+        UserResponse response = userService.authorize(UserRequest.builder()
+                .userName(user.getUsername())
                 .password(user.getPassword())
                 .build());
         assertThat(response.getUserName()).isEqualTo(user.getUsername());
