@@ -55,4 +55,5 @@ curl -X 'GET' \
   -H 'Authorization: Bearer YourToken'
 ```
 ** YourNumberRate should be one of value {zero,one,two,...,ten}
+
 ** YourMovieType should be one of value {movie, series, episode}
