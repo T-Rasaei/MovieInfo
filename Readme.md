@@ -103,9 +103,10 @@ Run the command to run the tests.
 mvn test
 ```
 Note: need install openjdk-17
+
 should pass all tests
 
-# To-Do
+# To Do
 - Adding a section that lists the top 10 movies by rating and movie genre
 - Adding a section that allows users to add comments to a movie and display the most common comments
 
@@ -114,4 +115,8 @@ Typically, 10-15k requests per second can be handled by one web server for a dyn
 if number of users/agents/consumers grows we can use load balancer.
 Load balancer contains multiple web servers and just forwards incoming requests to one of them to distribute.
 
-Note. Reading from external api is expensive. We cache fraction of data(recently accessed) to the local database. If data is not there in local database,  then read from external api and save it in local database for next time. 
+Note. Reading from external api is expensive. We cache fraction of data(recently accessed) to the local database. If data is not there in local database,  then read from external api and save it in local database for next time.
+
+# Contributing
+you can read [MovieInfoAPICatalog][https://github.com/T-Rasaei/MovieInfo/blob/master/MovieInfoAPICatalog.pdf]  for understand architecture of this project.
+
