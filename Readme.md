@@ -1,13 +1,14 @@
 ## Movie Information Api
-Movie Information Api is a Java-based project developed using Spring Boot (version: 3.2.0) and POstgreSql . It provides a platform for users to show movie information, rate movies, and receive top 10 best movie based on rating and imdb score.
+Movie Information Api is a Java-based project developed using Spring Boot (version: 3.2.0) and POstgreSql.
+It provides a platform for users to show movie information,check a movie has oscar (based on this [API](http://www.omdbapi.com/) and this [CSV](https://backbase.atlassian.net/wiki/download/attachments/2930016591/academy_awards.csv?version=1&modificationDate=1620402580285&cacheVersion=1&api=v2&download=true) file that
+contains winners from 1927 until 2010), rate movies, and receive top 10 best movie based on rating and imdb score.
 
 Here is what this little application demonstrates:
-
-    Full integration with the latest Spring Framework: inversion of control, dependency injection, etc.
-    Writing a RESTful service using annotation
-    Spring Data Integration with JPA/Hibernate with just a few lines of configuration and familiar annotations.
-    Automatic CRUD functionality against the data source using Spring Repository pattern
-    Demonstrates MockMVC test framework with associated libraries
+- Full integration with the latest Spring Framework: inversion of control, dependency injection, etc.
+- Writing a RESTful service using annotation
+- Spring Data Integration with JPA/Hibernate with just a few lines of configuration and familiar annotations.
+- Automatic CRUD functionality against the data source using Spring Repository pattern
+- Demonstrates MockMVC test framework with associated libraries
 
 Here are some endpoints you can call:
 Get information about Movie, rating, etc.
@@ -27,7 +28,7 @@ Get information about Movie, rating, etc.
 * list top-10 movies
 * rate to movie
 
-# Installation
+# How To Run
 1.Clone the repository:
 ```shell
   git clone https://github.com/T-Rasaei/MovieInfo.git
@@ -48,7 +49,7 @@ movieApp      | 2024-01-17T06:22:11.002Z  INFO 1 --- [           main] c.m.movie
 ```
 3. Run the server and browse to http://localhost:8080/swagger-ui/index.html
 
-# How To Use Project
+# How To Use 
 You use swagger link or curl command in shell for create request.
 1. For first time , create user. 
 ```shell
@@ -102,5 +103,15 @@ Run the command to run the tests.
 mvn test
 ```
 Note: need install openjdk-17
+should pass all tests
 
+# To-Do
+- Adding a section that lists the top 10 movies by rating and movie genre
+- Adding a section that allows users to add comments to a movie and display the most common comments
 
+# Scale
+Typically, 10-15k requests per second can be handled by one web server for a dynamic website, but it depends totally on complexity of website/web application.
+if number of users/agents/consumers grows we can use load balancer.
+Load balancer contains multiple web servers and just forwards incoming requests to one of them to distribute.
+
+Note. Reading from external api is expensive. We cache fraction of data(recently accessed) to the local database. If data is not there in local database,  then read from external api and save it in local database for next time. 
