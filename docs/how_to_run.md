@@ -1,4 +1,4 @@
-# How To Run
+## How To Run
 1.Clone the repository:
 ```shell
   git clone https://github.com/T-Rasaei/MovieInfo.git
