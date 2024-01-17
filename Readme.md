@@ -118,5 +118,5 @@ Load balancer contains multiple web servers and just forwards incoming requests 
 Note. Reading from external api is expensive. We cache fraction of data(recently accessed) to the local database. If data is not there in local database,  then read from external api and save it in local database for next time.
 
 # Contributing
-you can read [MovieInfoAPICatalog][https://github.com/T-Rasaei/MovieInfo/blob/master/MovieInfoAPICatalog.pdf]  for understand architecture of this project.
+you can read [MovieInfoAPICatalog](https://github.com/T-Rasaei/MovieInfo/blob/master/MovieInfoAPICatalog.pdf)  for understand architecture of this project.
 
