@@ -63,5 +63,4 @@ curl -X 'GET' \
 > [!NOTE]
 > YourNumberRate should be one of value {zero,one,two,...,ten}
 > 
-> [!NOTE]
 > YourMovieType should be one of value {movie, series, episode}
