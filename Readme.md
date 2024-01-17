@@ -13,7 +13,8 @@ Run the command to run the tests.
 ```shell
 mvn test
 ```
-Note: need install openjdk-17
+> [!IMPORTANT] 
+> need install openjdk-17
 
 should pass all tests
 
