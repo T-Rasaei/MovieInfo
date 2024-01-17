@@ -11,11 +11,11 @@ services:
       - POSTGRES_PASSWORD=1234
     volumes:
       - C:\docker_file\postgres_data://var/lib/postgresql/data
+    restart: always
 
   app:
     build: .
     container_name: movieApp
-#    image: movieapp
     depends_on:
       - db
     ports:
@@ -25,3 +25,4 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=1234
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    restart: always
