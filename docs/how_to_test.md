@@ -28,7 +28,7 @@ this command return a token based on username and password that register before.
 ("Find title of movie" section in swagger link)
 ```shell
 curl -X 'GET' \
-  'http://localhost:8080/api/v1/movie/searchtitle/titanic' \
+  'http://localhost:8080/api/v1/movie/searchtitle/YourMovieTitle' \
   -H 'Authorization: Bearer yourToken'
 ```
 the output of this command is list of movies that contains your title that you have given.
@@ -36,7 +36,7 @@ the output of this command is list of movies that contains your title that you h
 ("Has an Oscar?" section in swagger link)
 ```shell
 curl -X 'GET' \
-  'http://localhost:8080/api/v1/movie/Oscar/titanic?year=1996' \
+  'http://localhost:8080/api/v1/movie/Oscar/YourMovieTitle?year=YourMovieYear' \
   -H 'Authorization: Bearer yourToken'
 ```
 this command return true or false.
@@ -51,6 +51,8 @@ curl -X 'GET' \
 ("Rate the movie" section in swagger link)
 ```shell
   curl -X 'PUT' \
-  'http://localhost:8080/api/v1/movie/rating?title=titanic&year=1996&type=movie&rate=THREE' \
+  'http://localhost:8080/api/v1/movie/rating?title=YourMovieTitle&year=YourMovieYear&type=YourMovieType&rate=YourNumberRate' \
   -H 'Authorization: Bearer YourToken'
 ```
+** YourNumberRate should be one of value {zero,one,two,...,ten}
+** YourMovieType should be one of value {movie, series, episode}
