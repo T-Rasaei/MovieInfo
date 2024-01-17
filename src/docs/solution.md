@@ -10,7 +10,7 @@ Here is what this little application demonstrates:
 - Automatic CRUD functionality against the data source using Spring Repository pattern
 - Demonstrates MockMVC test framework with associated libraries
 
-# Features
+## Features
 * register user with http://localhost:8080/api/v1/user/create endpoint
 * authenticate user with http://localhost:8080/api/v1/user/authenticate endpoint
 * find exact title of movie with http://localhost:8080/api/v1/movie/searchtitle endpoint
